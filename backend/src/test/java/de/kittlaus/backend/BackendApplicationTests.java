@@ -32,7 +32,6 @@ class KingOfHHIntegrationTests {
     }
 
     //Login and Register
-
     @Test
     void shouldRegisterNewUserWithValidInputs(){
         //GIVEN
@@ -46,7 +45,6 @@ class KingOfHHIntegrationTests {
         assertThat(actual.getRole()).isEqualTo("USER");
         assertThat(actual.getUsername()).isEqualTo("Franz");
     }
-
     @Test
     void shouldFailCreateNewUserDifferentPasswords(){
         //GIVEN
@@ -56,7 +54,6 @@ class KingOfHHIntegrationTests {
         //THEN
         assertThat(myUserDtoResponseEntity.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
     }
-
     @Test
     void shouldFailCreateNewUserWithExistingUsername(){
         //GIVEN
@@ -67,7 +64,6 @@ class KingOfHHIntegrationTests {
         //THEN
         assertThat(myUserDtoResponseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
-
     @Test
     void shouldGetTokenWithValidCredentials(){
         //GIVEN
@@ -80,7 +76,6 @@ class KingOfHHIntegrationTests {
         assertThat(tokenResponseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(tokenResponseEntity.getBody()).isNotNull();
     }
-
     @Test
     void shouldNotGetTokenWithInvalidCredentials(){
         //GIVEN
@@ -95,8 +90,5 @@ class KingOfHHIntegrationTests {
         assertThat(tokenResponseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(tokenResponseEntity2.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
-
-
-
 
 }
