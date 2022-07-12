@@ -3,6 +3,7 @@ package de.kittlaus.backend.user;
 
 import de.kittlaus.backend.models.user.MyUser;
 import de.kittlaus.backend.models.user.MyUserDto;
+import de.kittlaus.backend.models.user.RegisterUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,9 +21,8 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
 
     @PostMapping
-    public ResponseEntity<MyUser> createUser(@RequestBody MyUser user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("USER");
+    public ResponseEntity<MyUserDto> createUser(@RequestBody RegisterUser user) {
+        user.setHashedPassword(passwordEncoder.encode(user.getPassword()));
         return userService.createUser(user);
     }
 

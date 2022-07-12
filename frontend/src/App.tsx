@@ -1,17 +1,17 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import ExamplePage from "./ExamplePage";
 import TestPage from "./TestPage";
 import AuthProvider from "./auth/AuthProvider";
+import LoginRegistrationPage from "./pages/LoginRegistrationPage";
 
 export default function App() {
     return(
         <BrowserRouter>
             <AuthProvider>
                 <Routes>
-                    <Route path={'/'} element={<ExamplePage/>}/>
-                    <Route path={'/testme'} element={<TestPage/>}/>
+                    <Route path={'/login'} element={<LoginRegistrationPage/>}/>
+                    <Route path={'/'} element={<TestPage/>}/>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>

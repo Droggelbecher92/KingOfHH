@@ -1,8 +1,12 @@
 package de.kittlaus.backend.user;
 
 import de.kittlaus.backend.models.user.MyUser;
+import de.kittlaus.backend.models.user.MyUserDto;
+import de.kittlaus.backend.models.user.RegisterUser;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,10 +21,19 @@ public class UserService {
         return userRepo.findByUsername(username);
     }
 
-    public ResponseEntity<MyUser> createUser(MyUser user) {
-        if (userRepo.findByUsername(user.getUsername()).isPresent()){
-            return ResponseEntity.badRequest().body(MyUser.builder().build());
+    public ResponseEntity<MyUserDto> createUser(RegisterUser user) {
+        if (!user.getPassword().equals(user.getPasswordAgain())){
+            return new ResponseEntity<>(MyUserDto.builder().build(),HttpStatus.CONFLICT);
         }
-        return ResponseEntity.ok(userRepo.save(user));
+        if (userRepo.findByUsername(user.getUsername()).isPresent()){
+            return ResponseEntity.badRequest().body(MyUserDto.builder().build());
+        }
+        MyUser myUser = MyUser.builder()
+                .password(user.getHashedPassword())
+                .username(user.getUsername())
+                .role("USER")
+                .build();
+        userRepo.save(myUser);
+        return ResponseEntity.ok(MyUserDto.builder().role("USER").username(myUser.getUsername()).build());
     }
 }
