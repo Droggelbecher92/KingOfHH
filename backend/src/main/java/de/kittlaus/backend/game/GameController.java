@@ -19,8 +19,13 @@ public class GameController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Game> postNewGame(@RequestBody ArrayList<Player> players){
-        return ResponseEntity.of(gameService.createGame(players));
+    public ResponseEntity<Game> postNewGame(@RequestBody Player player){
+        return ResponseEntity.of(gameService.createGame(player));
+    }
+
+    @PutMapping("/addPlayer/{id}")
+    public ResponseEntity<Game> addPlayerToGame(@RequestBody Player player, @PathVariable String id){
+        return ResponseEntity.of(gameService.addPlayer(player,id));
     }
 
 }
