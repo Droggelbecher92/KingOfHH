@@ -14,4 +14,9 @@ public class RegisterUser {
     private String passwordAgain;
     private String hashedPassword;
 
+    public RegisterUser(String username, String password, String passwordAgain) {
+        this.username = username;
+        this.password = password;
+        this.passwordAgain = passwordAgain;
+    }
 }
