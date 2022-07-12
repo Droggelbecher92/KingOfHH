@@ -37,8 +37,8 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .mvcMatchers(HttpMethod.POST, "/api/user").permitAll()
-                .antMatchers(HttpMethod.GET, "/index*", "/static/**", "/*.js", "/*.json", "/*.ico","/*.png", "/").permitAll()
-                .antMatchers("/**").authenticated()
+                .antMatchers("api/**").authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
