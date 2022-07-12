@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .cors().configurationSource(corsConfigurationSource())
                 .and()
                 .authorizeRequests()
-                .mvcMatchers(HttpMethod.POST, "/api/user").permitAll()
+                .mvcMatchers(HttpMethod.POST, "/api/user","/auth").permitAll()
                 .antMatchers("api/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
