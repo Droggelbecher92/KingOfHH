@@ -25,6 +25,11 @@ export const getAllOpenGames = (token : string) => {
         .then(response => response.data)
 }
 
+export const joinExistingGame = (gameId : string, token:string) => {
+    return axios.put(`/api/game/addPlayer/${gameId}`, null, createHeaders(token))
+        .then(response => response.data)
+}
+
 //HELPER
 
 const createHeaders = (token : string) => {

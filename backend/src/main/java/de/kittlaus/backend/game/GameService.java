@@ -27,10 +27,11 @@ public class GameService {
         return Optional.of(gameRepo.save(new Game(players)));
     }
 
-    public Optional<Game> addPlayer(Player player, String id) {
+    public Optional<Game> addPlayer(MyUser user, String id) {
         Optional<Game> optGame = gameRepo.findById(id);
         if (optGame.isPresent()){
             List<Player> players = optGame.get().getPlayers();
+            Player player = new Player(user.getId(), user.getUsername());
             players.add(player);
             optGame.get().setPlayers(players);
             gameRepo.save(optGame.get());

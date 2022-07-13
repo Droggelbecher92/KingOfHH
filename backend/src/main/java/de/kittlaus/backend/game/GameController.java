@@ -35,8 +35,9 @@ public class GameController {
     }
 
     @PutMapping("/addPlayer/{id}")
-    public ResponseEntity<Game> addPlayerToGame(@RequestBody Player player, @PathVariable String id){
-        return ResponseEntity.of(gameService.addPlayer(player,id));
+    public ResponseEntity<Game> addPlayerToGame(Principal principal, @PathVariable String id){
+        MyUser user = userService.findByUsername(principal.getName()).orElseThrow();
+        return ResponseEntity.of(gameService.addPlayer(user,id));
     }
 
 }
