@@ -3,6 +3,7 @@ package de.kittlaus.backend.game;
 
 import de.kittlaus.backend.models.game.Game;
 import de.kittlaus.backend.models.game.Player;
+import de.kittlaus.backend.models.user.MyUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,9 @@ public class GameService {
     private final GameRepo gameRepo;
 
 
-    public Optional<Game> createGame(Player player) {
+    public Optional<Game> createGame(MyUser user) {
         ArrayList<Player> players = new ArrayList<>();
+        Player player = new Player(user.getId(), user.getUsername());
         players.add(player);
         return Optional.of(gameRepo.save(new Game(players)));
     }

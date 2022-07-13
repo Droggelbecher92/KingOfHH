@@ -27,5 +27,8 @@ public class Player {
     private List<PowerCard> playerCards;
     private List<String> powerUps;
 
-
+    public Player(String userId, String name) {
+        this.userId = userId;
+        this.name = name;
+    }
 }
