@@ -27,11 +27,14 @@ public class GameService {
         return Optional.of(gameRepo.save(new Game(players)));
     }
 
-    public Optional<Game> addPlayer(MyUser user, String id) {
+    public Optional<Game> addPlayer(MyUser user, String id) throws IllegalArgumentException {
         Optional<Game> optGame = gameRepo.findById(id);
         if (optGame.isPresent()){
             List<Player> players = optGame.get().getPlayers();
             Player player = new Player(user.getId(), user.getUsername());
+            if (players.contains(player)){
+                throw new IllegalArgumentException("Schon im Spiel");
+            }
             players.add(player);
             optGame.get().setPlayers(players);
             gameRepo.save(optGame.get());

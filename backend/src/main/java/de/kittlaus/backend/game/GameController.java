@@ -37,7 +37,12 @@ public class GameController {
     @PutMapping("/addPlayer/{id}")
     public ResponseEntity<Game> addPlayerToGame(Principal principal, @PathVariable String id){
         MyUser user = userService.findByUsername(principal.getName()).orElseThrow();
-        return ResponseEntity.of(gameService.addPlayer(user,id));
+        try {
+            return ResponseEntity.of(gameService.addPlayer(user,id));
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().build();
+        }
+
     }
 
 }
