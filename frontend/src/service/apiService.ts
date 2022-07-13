@@ -21,7 +21,7 @@ export const createNewGame = (token : string) => {
 }
 
 export const getAllOpenGames = (token : string) => {
-    return axios.get<Game>(`/api/game/open`,createHeaders(token))
+    return axios.get<Array<Game>>(`/api/game/open`,createHeaders(token))
         .then(response => response.data)
 }
 
