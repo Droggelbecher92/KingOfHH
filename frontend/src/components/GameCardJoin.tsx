@@ -14,9 +14,11 @@ export default function GameCardJoin({data}:GameCardJoinProps){
 
     const joinGame = () =>{
         joinExistingGame(data.id,token)
-            .then(data => {
-                console.log(data)
-                nav(`/lobby/${data.id}`)
+            .then(data => nav(`/lobby/${data.id}`))
+            .catch(err => {
+                if (err.response.status===400){
+                    console.log("Nutzer schon im Spiel")
+                }
             })
     }
 
