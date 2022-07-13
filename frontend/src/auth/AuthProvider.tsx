@@ -13,9 +13,14 @@ export default function AuthProvider({children}:{children :ReactNode}) {
 
     useEffect(() => {
         if (token) {
+            localStorage.setItem('jwt',token)
             const decodeJWT : JwtToken = jwtDecode(token)
+            if (decodeJWT.exp<Date.now()/1000){
+                localStorage.removeItem('jwt')
+                setToken('')
+            }
             setUsername(decodeJWT.sub);
-            setRole(decodeJWT.role[0])
+            setRole(decodeJWT.roles[0])
         } else {
             nav('/login')
         }

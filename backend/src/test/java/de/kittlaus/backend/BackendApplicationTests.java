@@ -1,6 +1,7 @@
 package de.kittlaus.backend;
 
 import de.flapdoodle.embed.mongo.MongodExecutable;
+import de.kittlaus.backend.game.GameRepo;
 import de.kittlaus.backend.models.security.Credentials;
 import de.kittlaus.backend.models.security.Token;
 import de.kittlaus.backend.models.user.MyUserDto;
@@ -25,10 +26,13 @@ class KingOfHHIntegrationTests {
 
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private GameRepo gameRepo;
 
     @AfterEach
     void cleanupDb() {
         userRepo.deleteAll();
+        gameRepo.deleteAll();
     }
 
     //Login and Register

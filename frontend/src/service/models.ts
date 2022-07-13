@@ -1,7 +1,5 @@
 // Auth
 
-import {AxiosResponse} from "axios";
-
 export interface AuthInterface {
     token : string,
     username : string,
@@ -23,5 +21,35 @@ export interface JwtToken {
     sub : string,
     iat : number,
     exp: number,
-    role: Array<string>
+    roles: Array<string>
+}
+
+//GAME
+
+export interface Game {
+    id : string,
+    players : Player[],
+    cardDeck : PowerCard[],
+    usedCards : PowerCard[],
+    kingOfHH : Player,
+    started : boolean,
+}
+
+export interface PowerCard{
+
+}
+
+export interface Player {
+    userId : string,
+    name : string,
+    health : number,
+    maxHealth : number,
+    energy : number,
+    score : number,
+    die : number,
+    dieThrows : number,
+    attack : number,
+    defense : number,
+    playerCards : PowerCard[],
+    powerUps : string[];
 }

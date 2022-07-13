@@ -24,6 +24,8 @@ public class Game {
     private List<PowerCard> usedCards;
     private Player kingOfHH;
 
+    private boolean started = false;
+
     public Game(List<Player> players) {
         this.players = players;
         cardDeck = new ArrayList<>();
