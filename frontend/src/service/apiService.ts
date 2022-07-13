@@ -20,6 +20,11 @@ export const createNewGame = (token : string) => {
         .then(response => response.data)
 }
 
+export const getAllOpenGames = (token : string) => {
+    return axios.get<Game>(`/api/game/open`,createHeaders(token))
+        .then(response => response.data)
+}
+
 //HELPER
 
 const createHeaders = (token : string) => {

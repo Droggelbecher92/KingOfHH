@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +27,11 @@ public class GameController {
     public ResponseEntity<Game> postNewGame(Principal principal){
         MyUser user = userService.findByUsername(principal.getName()).orElseThrow();
         return ResponseEntity.of(gameService.createGame(user));
+    }
+
+    @GetMapping("/open")
+    public List<Game> getAllOpenGames(){
+        return gameService.findAllOpen();
     }
 
     @PutMapping("/addPlayer/{id}")

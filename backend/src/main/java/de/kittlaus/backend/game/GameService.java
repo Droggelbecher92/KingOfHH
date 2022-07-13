@@ -37,4 +37,8 @@ public class GameService {
         }
         return optGame;
     }
+
+    public List<Game> findAllOpen() {
+        return gameRepo.findAllByStartedIsFalse();
+    }
 }

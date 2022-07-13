@@ -1,5 +1,5 @@
 import {useAuth} from "../auth/AuthProvider";
-import {createNewGame} from "../service/apiService";
+import {createNewGame, getAllOpenGames} from "../service/apiService";
 
 export default function HomePage(){
 
@@ -11,11 +11,16 @@ export default function HomePage(){
             .then(data => console.log(data))
     }
 
+    const getOpenGames = () => {
+        getAllOpenGames(token)
+            .then(data => console.log(data))
+    }
+
 
     return(<div>
             <h2>Hallo {username}</h2>
             <button onClick={createGame}>Eigenes Spiel eröffnen</button>
-            <button>Offene Spiele suchen</button>
+            <button onClick={getOpenGames}>Offene Spiele suchen</button>
     </div>
 
     )
